@@ -1,0 +1,22 @@
+#!/usr/bin/expect -f
+
+set prompt "\n\[a-z0-9\]+> $"
+set prompt_enabled "\n\[a-z0-9\(\)\-\]+# $"
+set hostname "frrouting"
+
+log_user 0
+spawn telnet $hostname 2601
+
+expect "Password: "
+exp_send "lg\r"
+expect -re $prompt
+exp_send "term len 0\r"
+exp_send "term width 160\r"
+exp_send "enable\r"
+expect "Password: "
+exp_send "lg\r"
+expect -re $prompt_enabled
+
+exp_send "show ip route bgp\r"
+log_user 1
+expect "#"

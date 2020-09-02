@@ -1,3 +1,5 @@
 <pre>
-<?php passthru('/sbin/route -n 2>&1'); ?>
+<?php
+passthru('./bin/routes.exp');
+?>
 </pre>
